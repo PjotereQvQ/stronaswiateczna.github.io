@@ -1,0 +1,708 @@
+@import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Lato:100,100italic,300,300italic,regular,italic,700,700italic,900,900italic");
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  overflow: hidden;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+#baner {
+  width: 100%;
+  height: 100px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 15px;
+  background-image: url("baner-tlo.jpg");
+  background-size: cover;
+  background-position: 50% 0;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.none {
+  display: none;
+}
+
+#baner div {
+  height: 100%;
+  float: left;
+  display: flex;
+  align-items: center;
+  font-family: "Pacifico";
+}
+
+#lewo,
+#prawo {
+  width: 28%;
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  justify-content: center;
+  font-size: 20px;
+}
+
+#lewo div,
+#prawo div {
+  flex: 1;
+  text-align: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  border-radius: 10px;
+}
+
+#obrazek-home {
+  background-image: url("tlo.jpg");
+  height: 55dvh;
+  width: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+}
+
+#timer {
+  border-radius: 50%;
+  background-color: rgb(255, 50, 50);
+  width: 250px;
+  aspect-ratio: 1/1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  right: -75px;
+  bottom: -50px;
+  flex-direction: column;
+  transition: width 0.5s ease, border-width 0.5s ease;
+  font-family: "Lato";
+  font-size: 20px;
+  border: 1px solid black;
+  color: white;
+}
+
+#timer > h2 {
+  font-family: "Pacifico";
+}
+
+#timer:hover {
+  width: 500px;
+  border-width: 5px;
+}
+
+#baner > div > div:hover {
+  background-color: rgb(228, 195, 195);
+}
+
+#platki {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100vh;
+  pointer-events: none;
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(-10%);
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(110vh);
+    opacity: 0;
+  }
+}
+
+.platek {
+  position: absolute;
+  top: -10px;
+  background-image: url("platek.png");
+  border-radius: 50%;
+  background-size: cover;
+}
+
+#informacje {
+  width: 70%;
+  height: 300px;
+  font-family: "lato";
+  font-size: 20px;
+  padding: 50px;
+}
+
+#informacje h2 {
+  font-family: "Pacifico";
+}
+
+#kalendarz-adwentowy {
+  width: 42%;
+  aspect-ratio: 1/1;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  font-family: "Pacifico";
+  font-size: 25px;
+  gap: 10px;
+  padding-top: 20px;
+}
+
+.adwent-dzien {
+  position: relative;
+  border: 2px solid black;
+  display: none;
+  color: white;
+}
+
+.dzien {
+  background-color: rgb(255, 50, 50);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  z-index: 3;
+  transform-origin: bottom;
+  transition: transform 1s ease-in-out;
+  background-image: url("adwent-tlo.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  text-align: center;
+}
+
+.adwent-info {
+  background-color: rgb(50, 255, 50);
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  background-image: url("zadanie-tlo.jpg");
+  background-size: cover;
+  cursor: pointer;
+}
+
+@keyframes otwieranie {
+  0% {
+    transform: rotateX(0deg);
+    display: block;
+    z-index: 100;
+  }
+
+  99% {
+    display: block;
+  }
+
+  100% {
+    display: none;
+    transform: rotateX(270deg);
+  }
+}
+
+.Zadanie {
+  width: 60%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 50px;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  background-color: white;
+  border-radius: 20px;
+  border: 5px solid black;
+  overflow: hidden;
+  background-image: url("ciekawosta-tlo.jpg");
+  background-size: cover;
+  font-family: "Pacifico";
+  font-size: 20px;
+}
+
+.usun {
+  width: 75px;
+  height: 75px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: red;
+  cursor: pointer;
+  font-size: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Lato";
+  color: white;
+}
+
+#koledy {
+  margin: 20px auto;
+  width: 60%;
+  height: 20vh;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  gap: 15px;
+  justify-content: center;
+}
+
+#zdjecie-koledy {
+  padding-top: 30px;
+  height: 50vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+img {
+  height: 100%;
+  aspect-ratio: 1/1;
+  border-radius: 30px;
+}
+
+.koleda-div {
+  aspect-ratio: 1/1;
+  flex: 1;
+  border-radius: 20px;
+  background-size: cover;
+  filter: opacity(0.7);
+  transition: filter 0.8s ease;
+}
+
+.koleda-active {
+  border: 4px solid rgb(215, 215, 215);
+  filter: opacity(1);
+}
+
+#przyciski {
+  height: 12vh;
+  width: 100%;
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 15px;
+}
+
+#cofanie,
+#pauza,
+#przod {
+  width: 100px;
+  aspect-ratio: 1/1;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 80px;
+  cursor: pointer;
+}
+
+#glosnosc-koledy {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100px;
+  height: 15px;
+  background: linear-gradient(45deg, #e74c3c, #2ecc71, #f39c12);
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  outline: none;
+  transition: background 0.3s, box-shadow 0.3s;
+  transform: rotate(-90deg) translate(-45px);
+}
+
+#glosnosc-koledy:hover {
+  background: linear-gradient(45deg, #c0392b, #27ae60, #f39c12);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+}
+
+#glosnosc-koledy::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  background: url("https://www.svgrepo.com/show/82525/christmas-tree.svg")
+    no-repeat center center;
+  background-size: 20px 20px;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  transition: background 0.3s, box-shadow 0.3s;
+  transform: translateY(-1.8px);
+}
+
+#glosnosc-koledy::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  background: url("https://www.svgrepo.com/show/82525/christmas-tree.svg")
+    no-repeat center center;
+  background-size: 20px 20px;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  transition: background 0.3s, box-shadow 0.3s;
+}
+
+#glosnosc-koledy::-webkit-slider-runnable-track {
+  height: 15px;
+  background: linear-gradient(45deg, #e74c3c, #2ecc71, #f39c12);
+  border-radius: 10px;
+}
+
+#glosnosc-koledy::-moz-range-track {
+  height: 15px;
+  background: linear-gradient(45deg, #e74c3c, #2ecc71, #f39c12);
+  border-radius: 10px;
+}
+
+#glosnosc-koledy:active::-webkit-slider-thumb {
+  background: url("https://www.svgrepo.com/show/82525/christmas-tree.svg")
+    no-repeat center center;
+  background-size: 18px 18px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+}
+
+#glosnosc-koledy:active::-moz-range-thumb {
+  background: url("https://www.svgrepo.com/show/82525/christmas-tree.svg")
+    no-repeat center center;
+  background-size: 18px 18px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+}
+
+#kursy-przyciski {
+  height: calc(100vh - 100px);
+  margin-top: 100px;
+  width: 50%;
+  float: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 0 300px 300px;
+  gap: 10px;
+  font-family: "Pacifico";
+}
+
+.kurs-przycisk {
+  cursor: pointer;
+  display: inline-block;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 400px;
+  height: 100px;
+  padding: 22px 33px;
+  font-family: "Lobster", cursive;
+  font-size: 26px;
+  line-height: 26px;
+  text-decoration: none;
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.75);
+  background: #5e0d0c;
+  outline: none;
+  border-radius: 15px;
+  border: 1px solid #4c0300;
+  box-shadow: inset 1px 1px 0px rgba(255, 255, 255, 0.25), inset 0 0 6px #a23227,
+    inset 0 80px 80px -40px #ac3223, 1px 1px 3px rgba(0, 0, 0, 0.75);
+
+  position: relative;
+  overflow: visible;
+  -webkit-transition: 500ms ease;
+  -moz-transition: 500ms ease;
+  -o-transition: 500ms ease;
+  transition: 500ms ease;
+}
+
+.kurs-przycisk::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: -7px;
+  left: -3px;
+  right: 0;
+  height: 23px;
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACsAAAAXCAYAAACS5bYWAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAABFpJREFUeNrUV0tIo1cUvpkYjQ4xxSA6DxuNqG0dtaUKOgs3s6i0dFd3pSsXdjeIixakiGA34sZuXCkoONLFwJTK4GMYLYXg29gatTpiXurkbd7vv9/5ub+IxuhA7eiFQ5Kbc8/57ne/e87/ywRBYLdl3GG3aNwqsLJ0k0tLS+fmcnNzWUVFBVMoFGx2djarvLxcm5OTw+bm5iytra2xc4ExNjY27iqVyvvwK6CpeDzuCYVC1urq6qDA9UcfPp+PHR4esmAwKK6tr68/l5/8rgQ2Ozub1dbWyiYmJooaGxt/VqvV38jlchX9l0qlwoFA4DWS/RKLxRxFRUVf5+XlPcaaT2AP0sVPJBL2SCRiAPBpu93+vKamZo/Ae71eZjabWV1dXVqw7CKwp43ksrCw8Bhg7MJ/PLDZ5PHx8cz29vYT5JGD/bSYLgTrcDgYdk6siSc6NjZWDaAe4ZoHQL+cmZnRpZPnhWDpD8kw7uKo9ML/NMCsd2tr61vkzboMrEyv138M7TyLRqMWMBsX3sMgaZhMpp+AR5EJrCocDpuEGzKg4x8khs+CVWxubvZfR9JkMik4nU7BarUKLpeLmLsKuwIqTLynp4fqmIzASrqQT09Pf1VVVfX0KsWZ6uHBwQHTaDSsoKAgo6/H4xHLEcrVyRwuEisrKzs5XrrIVAVwiUVDKRRrL+YI32ewdVhMApuHWvcj6vids6J2u90MF4yBHUZNgKoEBaRBQalJqFSqtJfUYrGIlQX+ydXVVTN+u0tKSjQNDQ1axJVl2iTypebn55d7e3v/kqoDgZU1NTU9LCws/Py0M+2ekuGincxJ3yF+18jIyHJLS0slQJUWFxczrBeBE0vE5tHRkbixlZWVfSR8gTX/0P5gH7S1tX3Z3t7+BW8qAvwSfr8/jA0EIRM/qoFtampqbW9vTw+XA+ojUruVd3Z2tvb19T2TQFEim81GgVJoCvvj4+NLOJZgaWmpemdn5y3a6BbcnJDAw8HBwac6ne6eqCW5XDwB3qVSqM9/DAwMUNy/eVLabT7sI25qwgujThCBhWE+mAt2yNc4SQKSZrOQQE1HS22VJkmPAGTr7+//fX19fRk+Zgq0trbGeFAKEAQT98BSqKOj47vm5uaa/Px8JeIk4GcaHh6eWlxcfAU/A8xG67BxAX3fwdcbYUpSDJ06Z49Ak8ZC3OL8f3YiA4PBYKdLQ2AJ9OTk5GpXV9cQiCVh79M94QtlPLDUE/1gPNrd3f0W33W4cBoco48zQuy/IZYAMnGqlSc4c66L9JruQUaSARXeT8HGKzxAqFBekni6+h46+pMzGiJGMgTOJh1yU/KNEGDvZWvfBawkA9ppwGg0mrRa7SOI2g+gxOgbJIpdFpj72PnxSnPX8vqRxTURgBQWKisrH+GThOm+CtAzoK/9/Uiqq/6hoaHfdnd3jaOjo7/yY7yxbwqkWy3sQzpS2C6YirwvUJk0y7hurfyGRrnduPGvAAMASmo8wzeVwfsAAAAASUVORK5CYII=)
+      no-repeat 0 0,
+    url(data:image/png;base64,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)
+      no-repeat 50% 0,
+    url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACEAAAAXCAYAAACFxybfAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAodJREFUeNrsVb1rWlEUv2pN/GqspKRSKFYXWzEloIWif0Fn6dJChQ7OQil0qd3EzcEpg0OgdHDr4CQODk7VRlLMEIVqApX4We0zflR9/Z1Ui4T34ksaaAYP/Hzc673n/M6550PG8zz73yKjn0wm83fDYDAwo9HINBrNnwOQg4MDs0ql2lQqlfdAWont7ng8Pjw+Ps44nc4G1pI9EXWaSOzt7TGO42aH5Pv7+08ajUZ0MBiUeXEZd7vdL5VK5fX29rZ+5tQiEmdxKrlcjsEYczgcynK5/BKKv/IXFNz/XiqVXkHdjUuRIA9SqdRD8or/R8Ez9fr9fqHVakUR4c2z0REjIQuHw2ZcrPBXLCA0RHTezEdHjIQqkUhEr9I4HOILhQLf6/VoOUFEvDMiQiToDx1Cdz+bzZ6bUFarlel0OkkVUK/XWbvdPoVer5fh3ntsfwJ+CJ2XA4p0Op1bpBgJyxDehQQ6nQ5DZXHBYDBZq9V+EhFUndnr9drEqoc2bwJbwGPgtohuVSwWe2Gz2TZMJpNgRKi6qtUqg2EWj8dTgUDgo0KhWPN4PC70EvXOzs67fD6/S6kiRIKeZA1YJ2MiJNbdbvfTUCjkV6vVK2hcDF8GI2w0GrGTkxM2HA5PDxaLxSOfz/cWEfk81X0XIMMFgJJ/srBjCgk8IdcfuVyuZ36//7nFYtkQyAMumUzuRiKRD0jMFLa+AZOpYwqgB/ziBVqmVBKUO7eAB/R0WG/Z7XaTVqtdbTabHJL6EK2djBaBPHA0NSqpbUsiMUeEBgpF4Q5AbZrmSJ/yEWgBTaBNHl9kdkgmMUeG7qwAq9PqovceTA3zlxlgsuswyuXsGsiSxJLEkoSY/BZgAEjRodi+uBruAAAAAElFTkSuQmCC)
+      no-repeat 100% 0;
+}
+
+.kurs-przycisk:hover {
+  background: #a61715;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.75), 0 0 40px #fff;
+  box-shadow: inset 1px 1px 0px rgba(255, 255, 255, 0.25), inset 0 0 6px #da3b2c,
+    inset 0 80px 80px -40px #dd4330, 1px 1px 3px rgba(0, 0, 0, 0.75);
+}
+
+.kurs-przycisk:focus {
+  outline: none;
+}
+
+.kurs-przycisk:active {
+  box-shadow: inset 1px 1px 0px rgba(255, 255, 255, 0.25), inset 0 0 6px #da3b2c,
+    inset 0 80px 80px -40px #dd4330, 0px 1px 0px rgba(255, 255, 255, 0.25);
+
+  -webkit-transition: 50ms linear;
+  -moz-transition: 50ms linear;
+  -o-transition: 50ms linear;
+  transition: 50ms linear;
+}
+
+#kurs-kurs {
+  width: 50%;
+  float: left;
+  height: calc(100vh - 100px);
+  padding: 120px 280px;
+  font-family: "Lato";
+  color: rgb(24, 24, 24);
+  background-image: url("kurs-tlo.jpg");
+  background-size: 60%;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  display: flex;
+  flex-direction: column;
+}
+
+#kurs-kurs h1 {
+  font-family: "Pacifico";
+  height: 100px;
+  margin-bottom: 10px;
+}
+
+#kurs-kurs strong {
+  font-family: "Pacifico";
+}
+
+#kurs-kurs h3 {
+  font-family: "Pacifico";
+  font-size: 22px;
+}
+
+#kurs-kurs p {
+  margin: 5px 0;
+}
+
+#gra-gra {
+  width: 100%;
+  position: relative;
+  height: calc(100vh - 100px);
+  background-image: url("gra.jpg");
+  background-size: cover;
+  background-position: 50% 50%;
+}
+
+#postac {
+  height: 150px;
+  width: 100px;
+  position: absolute;
+  left: calc(50% - 50px);
+  background-image: url("mikolaj.png");
+  background-size: cover;
+  background-position: 50%;
+  background-repeat: no-repeat;
+}
+
+.prezent {
+  width: 60px;
+  height: 60px;
+  position: absolute;
+  background-image: url("prezent.png");
+  background-size: cover;
+}
+
+#punkty {
+  position: fixed;
+  right: 0;
+  top: 100px;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Pacifico";
+  font-size: 40px;
+  color: white;
+}
+
+#tlo {
+  background-image: url("koleda-tlo.jpg");
+  background-size: cover;
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  z-index: -1;
+}
+
+#galeria-galeria {
+  width: 100%;
+  height: calc(100vh - 100px);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 100px;
+}
+
+.galeria-zdjecie {
+  width: 100%;
+  height: 50%;
+  transition: all 1s ease;
+  background-size: contain;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  border-radius: 20px;
+}
+
+.galeria {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.gwiazdka {
+  filter: grayscale(100%);
+  cursor: pointer;
+}
+
+.ocena {
+  font-size: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+
+.formularz {
+  width: 100%;
+  height: 100vh;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  flex-direction: column;
+}
+.formularz-poprawny {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+  height: 50%;
+  position: relative;
+  width: 500px;
+  border-radius: 20px;
+  gap: 10px;
+  padding: 20px;
+  background-image: url("kurs-tlo.jpg");
+  background-size: cover;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+}
+.formularz-usun {
+  all: unset;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 35px;
+  height: 35px;
+  border-radius: 20px;
+  background-color: red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 32px;
+  font-weight: bold;
+  cursor: pointer;
+  border: 3px solid black;
+}
+textarea[name="opinia"] {
+  width: 70%;
+  height: 200px;
+  padding: 5px;
+  resize: none;
+}
+.formularz-poprawny .img {
+  width: 60%;
+  height: 300px;
+  background-size: contain;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+}
+.formularz-wyslij {
+  all: unset;
+  cursor: pointer;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  font-family: "Lato";
+  border: 1px solid black;
+}
+.formularz-poprawny h1 {
+  font-family: "Pacifico";
+}
+.wysylanie {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  height: 100px;
+  margin: 20px;
+  color: white;
+  border-radius: 10px;
+  opacity: 0;
+  transform: translateY(100px);
+  border: 2px solid white;
+  font-family: "Lato";
+}
+
+@keyframes wysylanie {
+  0% {
+    opacity: 0;
+    transform: translateY(100px);
+  }
+  70% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(0);
+  }
+}

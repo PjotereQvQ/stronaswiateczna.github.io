@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Strona świąteczna</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div id="baner">
+      <div id="lewo">
+        <div id="kalendarz">
+          <a href="kalendarz.html">Kalendarz Adwentowy</a>
+        </div>
+        <div id="gry">
+          <a href="koledy.html">Świąteczne kolędy</a>
+        </div>
+        <div id="swiateczna-gra">
+          <a href="gra.html">Świąteczna gra</a>
+        </div>
+      </div>
+      <div id="h1">
+        <a href="index.html">
+          <h1>Strona Świąteczna</h1>
+        </a>
+      </div>
+      <div id="prawo">
+        <div id="kursy">
+          <a href="kurs.html">Świąteczne kursy</a>
+        </div>
+        <div id="galeria">
+          <a href="galeria.html">Galeria prac</a>
+        </div>
+      </div>
+    </div>
+
+    <div id="kalendarz-adwentowy"></div>
+
+    <div class="adwent-dzien">
+      <div class="dzien"></div>
+      <div class="adwent-info"></div>
+    </div>
+
+    <div id="timer"></div>
+    <div id="platki"></div>
+    <script>
+
+
+
+      //W większości zrobione bez ChatGPT
+
+
+
+      const kalendarzAdwentowy = [
+        {
+          dzien: 1,
+          typ: "Zadanie",
+          tresc: "Napisz funkcję, która odwraca ciąg znaków w JavaScript.",
+        },
+        {
+          dzien: 2,
+          typ: "Ciekawostka",
+          tresc:
+            "W 1936 roku Alan Turing opisał maszynę, która stała się fundamentem współczesnej informatyki.",
+        },
+        {
+          dzien: 3,
+          typ: "Zadanie",
+          tresc:
+            "Stwórz funkcję, która sprawdza, czy liczba jest liczbą pierwszą.",
+        },
+        {
+          dzien: 4,
+          typ: "Ciekawostka",
+          tresc:
+            "Pierwszy komputer elektryczny, ENIAC, ważył około 27 ton i zajmował powierzchnię 167 m².",
+        },
+        {
+          dzien: 5,
+          typ: "Zadanie",
+          tresc:
+            "Stwórz funkcję w JavaScript, która wypisuje wszystkie liczby Fibonacciego do 100.",
+        },
+        {
+          dzien: 6,
+          typ: "Ciekawostka",
+          tresc:
+            "Pierwszy program komputerowy został stworzony przez Ada Lovelace w 1843 roku.",
+        },
+        {
+          dzien: 7,
+          typ: "Zadanie",
+          tresc:
+            "Napisz funkcję, która sprawdza, czy ciąg znaków jest palindromem.",
+        },
+        {
+          dzien: 8,
+          typ: "Ciekawostka",
+          tresc:
+            "Język programowania Python został nazwany na cześć popularnego serialu 'Monty Python’s Flying Circus'.",
+        },
+        {
+          dzien: 9,
+          typ: "Zadanie",
+          tresc:
+            "Stwórz funkcję, która generuje losowy ciąg znaków o długości 10.",
+        },
+        {
+          dzien: 10,
+          typ: "Ciekawostka",
+          tresc:
+            "Internet początkowo był tylko narzędziem do wymiany informacji między naukowcami i wojskowymi.",
+        },
+        {
+          dzien: 11,
+          typ: "Zadanie",
+          tresc:
+            "Napisz funkcję, która zamienia wszystkie małe litery na wielkie w danym ciągu znaków.",
+        },
+        {
+          dzien: 12,
+          typ: "Ciekawostka",
+          tresc:
+            "Pierwszy system operacyjny Unix został stworzony w 1969 roku przez Kena Thompsona i Dennisa Ritchiego.",
+        },
+        {
+          dzien: 13,
+          typ: "Zadanie",
+          tresc:
+            "Stwórz funkcję, która liczy ile razy dana litera występuje w ciągu znaków.",
+        },
+        {
+          dzien: 14,
+          typ: "Ciekawostka",
+          tresc:
+            "Pierwszy komputer osobisty Apple I został sprzedany za 666,66 dolarów w 1976 roku.",
+        },
+        {
+          dzien: 15,
+          typ: "Zadanie",
+          tresc: "Stwórz funkcję, która oblicza sumę cyfr danej liczby.",
+        },
+        {
+          dzien: 16,
+          typ: "Ciekawostka",
+          tresc:
+            "Google jest nazwą, która pochodzi od matematycznego terminu 'googol', oznaczającego liczbę 1, a potem 100 zer.",
+        },
+        {
+          dzien: 17,
+          typ: "Zadanie",
+          tresc:
+            "Stwórz funkcję, która zamienia temperaturę z Celsjusza na Fahrenheita.",
+        },
+        {
+          dzien: 18,
+          typ: "Ciekawostka",
+          tresc:
+            "Pierwszy komputer z ekranem dotykowym został zaprezentowany przez firmę IBM w 1973 roku.",
+        },
+        {
+          dzien: 19,
+          typ: "Zadanie",
+          tresc:
+            "Stwórz funkcję, która sprawdza, czy liczba jest liczbą parzystą.",
+        },
+        {
+          dzien: 20,
+          typ: "Ciekawostka",
+          tresc:
+            "Pierwsze wersje Windowsa były tak źle zoptymalizowane, że wymagały komputerów o dużej mocy obliczeniowej.",
+        },
+        {
+          dzien: 21,
+          typ: "Zadanie",
+          tresc:
+            "Napisz funkcję, która liczy ile razy dana liczba występuje w tablicy.",
+        },
+        {
+          dzien: 22,
+          typ: "Ciekawostka",
+          tresc:
+            "Informatyka jest jedną z najszybciej rozwijających się dziedzin na świecie, a jej historia sięga lat 40. XX wieku.",
+        },
+        {
+          dzien: 23,
+          typ: "Zadanie",
+          tresc:
+            "Stwórz funkcję, która zamienia wszystkie wystąpienia jednej liczby na inną w tablicy.",
+        },
+        {
+          dzien: 24,
+          typ: "Ciekawostka",
+          tresc:
+            "Pierwsza strona internetowa powstała w 1991 roku, a jej twórcą był Tim Berners-Lee.",
+        },
+        {
+          dzien: 25,
+          typ: "Zadanie",
+          tresc: "Stwórz funkcję, która oblicza średnią z liczb w tablicy.",
+        },
+      ];
+
+      const kalendarzDzien = document.querySelector(".adwent-dzien");
+      let kalendarz = document.getElementById("kalendarz-adwentowy");
+      let dni = [];
+      let data = new Date();
+      let mies = data.getMonth();
+      let dzienMiesiaca = data.getDate();
+      if (mies == 11) {
+        while (dni.length < 25) {
+          let liczba = Math.floor(Math.random() * 25) + 1;
+          if (!dni.includes(liczba)) {
+            dni.push(liczba);
+          }
+        }
+
+        dni.forEach((dzien) => {
+          let temp = kalendarzDzien.cloneNode(true);
+          temp.style.display = `block`;
+          let dzienAdwentu = temp.querySelector(".dzien");
+          dzienAdwentu.innerHTML = dzien;
+          dzienAdwentu.style.fontSize = "30px";
+          let adwentInfo = temp.querySelector(".adwent-info");
+          let adwentDzien = temp.querySelector(".dzien");
+          let z = 1;
+          if (dzienMiesiaca >= dzien) {
+            if (z === 1) {
+              dzienAdwentu.style.animation = "otwieranie 1s both ease";
+              dzienAdwentu.style.animationDelay = `${dzien * 200}ms`;
+              z++;
+            }
+          }
+          adwentDzien.addEventListener("click", () => {
+            let gora = Math.floor(Math.random() * 30) + 1;
+            let lewo = Math.floor(Math.random() * 90) - 60;
+            if(!(dzienMiesiaca >= dzien)){
+            temp.style.top = `${gora}vh`;
+            temp.style.left = `${lewo}vw`;
+            adwentDzien.innerHTML = `Przyjdź ${dzien} grudnia`;
+            temp.style.zIndex = `${z + 10}`;
+            z++;
+            }
+          });
+          let kalendarzAdwentowyInfo = kalendarzAdwentowy.find(
+            (d) => d.dzien === dzien
+          );
+          adwentInfo.innerHTML = `<p>Dzien: ${kalendarzAdwentowyInfo.dzien}</p><p>${kalendarzAdwentowyInfo.typ}</p>`;
+
+          adwentInfo.addEventListener("click", () => {
+            let info = document.createElement("div");
+            let usun = document.createElement("div");
+            usun.className = "usun";
+            usun.innerHTML = "&times;";
+            info.className = "Zadanie";
+            info.innerHTML = `<h1>Dzien: ${kalendarzAdwentowyInfo.dzien}</h1>
+              <h2>Typ: ${kalendarzAdwentowyInfo.typ}</h2>
+              <p style='font-family: "Lato";'>${kalendarzAdwentowyInfo.tresc}</p>
+              `;
+            info.append(usun);
+            document.body.append(info);
+            usun.addEventListener("click", () => {
+              info.remove();
+            });
+          });
+          kalendarz.append(temp);
+        });
+      } else {
+        kalendarz.innerHTML = `Przyjdź w Grudniu!`;
+      }
+    </script>
+    <script src="zegar.js"></script>
+    <script src="platki.js"></script>
+  </body>
+</html>

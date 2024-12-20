@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Strona świąteczna</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <div id="baner">
+    <div id="lewo">
+      <div id="kalendarz">
+        <a href="kalendarz.html">Kalendarz Adwentowy</a>
+      </div>
+      <div id="gry">
+        <a href="koledy.html">Świąteczne kolędy</a>
+      </div>
+      <div id="swiateczna-gra">
+        <a href="gra.html">Świąteczna gra</a>
+      </div>
+    </div>
+    <div id="h1">
+      <a href="index.html">
+        <h1>Strona Świąteczna</h1>
+      </a>
+    </div>
+    <div id="prawo">
+      <div id="kursy">
+        <a href="kurs.html">Świąteczne kursy</a>
+      </div>
+      <div id="galeria">
+        <a href="galeria.html">Galeria prac</a>
+      </div>
+    </div>
+  </div>
+
+  <div id="gra-gra">
+    <div id="postac"></div>
+    <div id="punkty">0</div>
+  </div>
+
+  <div id="platki"></div>
+  <script src="platki.js"></script>
+  <script>
+
+    //zrobione głównie przez ChatGPT
+    let punkty = 0;
+    const punktyDiv = document.getElementById("punkty");
+    const gra = document.getElementById("gra-gra");
+    const postac = document.getElementById("postac");
+    const keysPressed = {};
+    let speed = 3;
+    let positionX = (gra.offsetWidth / 2) - 50;
+    let positionY = 20;
+
+    function dotyka(element) {
+      const a = element.getBoundingClientRect();
+      const b = postac.getBoundingClientRect();
+      return !(
+        a.bottom < b.top ||
+        a.top > b.bottom ||
+        a.right < b.left ||
+        a.left > b.right
+      );
+    }
+
+    function generujPrezenty() {
+      const prezenty = [];
+      for (let i = 0; i < 10; i++) {
+        const prezentDiv = document.createElement("div");
+        prezentDiv.className = "prezent";
+        prezentDiv.style.left = `${Math.floor(Math.random() * 90)}%`;
+        prezentDiv.style.top = `${Math.floor(Math.random() * 90)}%`;
+        gra.appendChild(prezentDiv);
+        prezenty.push(prezentDiv);
+      }
+      return prezenty;
+    }
+    function noKeysPressed() {
+      return !Object.values(keysPressed).some((isPressed) => isPressed);
+    }
+
+    function zmienPozycje() {
+      if (keysPressed['a']) {
+        positionX -= speed;
+        postac.style.backgroundImage = 'url("mikolaj-lewo.png")';
+        postac.style.backgroundSize = "70%";
+      }
+      if (keysPressed['d']) {
+        positionX += speed;
+        postac.style.backgroundImage = 'url("mikolaj-prawo.png")';
+        postac.style.backgroundSize = "70%";
+      }
+      if (keysPressed['w']) {
+        positionY -= speed;
+        postac.style.backgroundImage = 'url("mikolaj.png")';
+        postac.style.backgroundSize = "100%";
+      }
+      if (keysPressed['s']) {
+        positionY += speed;
+        postac.style.backgroundImage = 'url("mikolaj.png")';
+        postac.style.backgroundSize = "100%";
+      }
+      if (keysPressed['s'] && keysPressed['d']) {
+
+        postac.style.backgroundImage = 'url("mikolaj-prawo.png")';
+        postac.style.backgroundSize = "70%";
+      }
+      if (keysPressed['s'] && keysPressed['a']) {
+
+        postac.style.backgroundImage = 'url("mikolaj-lewo.png")';
+        postac.style.backgroundSize = "70%";
+      }
+      if (keysPressed['w'] && keysPressed['d']) {
+
+        postac.style.backgroundImage = 'url("mikolaj-prawo.png")';
+        postac.style.backgroundSize = "70%";
+      }
+      if (keysPressed['w'] && keysPressed['a']) {
+
+        postac.style.backgroundImage = 'url("mikolaj-lewo.png")';
+        postac.style.backgroundSize = "70%";
+      }
+      // Zmień tło, gdy żaden klawisz nie jest wciśnięty
+      if (noKeysPressed()) {
+        postac.style.backgroundImage = 'url("mikolaj.png")';
+        postac.style.backgroundSize = "100%";
+      }
+
+      positionX = Math.max(0, Math.min(positionX, gra.offsetWidth - postac.offsetWidth));
+      positionY = Math.max(0, Math.min(positionY, gra.offsetHeight - postac.offsetHeight));
+
+      postac.style.left = `${positionX}px`;
+      postac.style.top = `${positionY}px`;
+
+      prezenty.forEach((prezent, index) => {
+        if (dotyka(prezent)) {
+          prezent.style.left = `${Math.floor(Math.random() * 90)}%`;
+          prezent.style.top = `${Math.floor(Math.random() * 90)}%`;
+          punkty++;
+          punktyDiv.innerHTML = punkty;
+        }
+      });
+
+      requestAnimationFrame(zmienPozycje);
+    }
+
+
+    document.addEventListener('keydown', (e) => {
+      keysPressed[e.key] = true;
+    });
+
+    document.addEventListener('keyup', (e) => {
+      keysPressed[e.key] = false;
+    });
+
+    const prezenty = generujPrezenty();
+    zmienPozycje();
+
+  </script>
+</body>
+
+</html>

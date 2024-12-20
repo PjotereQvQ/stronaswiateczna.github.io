@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Strona świąteczna</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div id="baner">
+      <div id="lewo">
+        <div id="kalendarz">
+          <a href="kalendarz.html">Kalendarz Adwentowy</a>
+        </div>
+        <div id="gry">
+          <a href="koledy.html">Świąteczne kolędy</a>
+        </div>
+        <div id="swiateczna-gra">
+          <a href="gra.html">Świąteczna gra</a>
+        </div>
+      </div>
+      <div id="h1">
+        <a href="index.html">
+          <h1>Strona Świąteczna</h1>
+        </a>
+      </div>
+      <div id="prawo">
+        <div id="kursy">
+          <a href="kurs.html">Świąteczne kursy</a>
+        </div>
+        <div id="galeria">
+          <a href="galeria.html">Galeria prac</a>
+        </div>
+      </div>
+    </div>
+    <div id="tlo"></div>
+    </div>
+    <div id="gra">
+      <div id="zdjecie-koledy">
+        <img src="zdjecie1.jpg" alt="koleda">
+      </div>
+      <div id="koledy"></div>
+      <div id="przyciski">
+        <div id="cofanie">⏪</div>
+        <div id="pauza">⏸️</div>
+        <div id="przod">⏩</div>
+        <input
+          type="range"
+          id="glosnosc-koledy"
+          min="0"
+          max="1"
+          step="0.01"
+          value="0.25"
+        />
+      </div>
+    </div>
+    <div id="timer"></div>
+    <div id="platki"></div>
+    <audio id="koleda" src=""></audio>
+    <script src="zegar.js"></script>
+    <script src="platki.js"></script>
+    <script>
+      //Stworzone głównie przeze mnie, z drobnym wsparciem ChatGPT
+let zdjecieDiv = document.getElementById("zdjecie-koledy");
+      let koledyDiv = document.getElementById("koledy");
+      let koledaMuzyka = document.getElementById("koleda");
+      let doPrzodu = document.getElementById("przod");
+      let pauza = document.getElementById("pauza");
+      let doTylu = document.getElementById("cofanie");
+
+      const koledy = [
+        { koleda: "koleda1.mp3", zdjecie: "zdjecie1.jpg" },
+        { koleda: "koleda2.mp3", zdjecie: "zdjecie2.jpg" },
+        { koleda: "koleda3.mp3", zdjecie: "zdjecie3.jpg" },
+        { koleda: "koleda4.mp3", zdjecie: "zdjecie4.jpg" },
+        { koleda: "koleda5.mp3", zdjecie: "zdjecie5.jpg" },
+        { koleda: "koleda6.mp3", zdjecie: "zdjecie6.jpg" },
+      ];
+
+      let z = 0;
+      let x = 1;
+      let pausa = true;
+      let reklamaAktywna = false;
+      koledy.forEach((koleda, index) => {
+        let koledaDiv = document.createElement("div");
+        koledaDiv.className = "koleda-div";
+        koledaDiv.style.backgroundImage = `url(${koleda.zdjecie})`;
+        koledaDiv.addEventListener("click", () => {
+          if (!reklamaAktywna) {
+            z = index;
+            aktualizuj();
+            x++;
+          }
+        });
+        koledyDiv.append(koledaDiv);
+      });
+
+      function aktualizuj() {
+        if (x > 2) {
+          let rand = Math.floor(Math.random() * 2) + 1;
+          if (rand === 2) {
+            koledaMuzyka.src = "reklama.mp3";
+            reklamaAktywna = true;
+            koledaMuzyka.play();
+            koledaMuzyka.addEventListener(
+              "ended",
+              () => {
+                reklamaAktywna = false;
+                x = 1;
+                aktualizuj();
+              },
+              { once: true }
+            );
+          } else {
+            odtworzKolende();
+          }
+        } else {
+          odtworzKolende();
+        }
+      }
+
+      function odtworzKolende() {
+        reklamaAktywna = false;
+        koledaMuzyka.src = koledy[z].koleda;
+        zdjecieDiv.querySelector("img").src = `${koledy[z].zdjecie}`;
+        koledaMuzyka.play();
+        document
+          .querySelectorAll(".koleda-div")
+          .forEach((div) => div.classList.remove("koleda-active"));
+        document
+          .querySelectorAll(".koleda-div")
+          [z].classList.add("koleda-active");
+      }
+      aktualizuj();
+      doPrzodu.addEventListener("click", () => {
+        if (!reklamaAktywna) {
+          z = (z + 1) % koledy.length;
+          x++;
+          aktualizuj();
+        }
+      });
+      const dzwiek = document.getElementById("glosnosc-koledy");
+
+      koledaMuzyka.volume = dzwiek.value;
+
+      dzwiek.addEventListener("input", () => {
+        koledaMuzyka.volume = dzwiek.value;
+      });
+
+      koledaMuzyka.addEventListener("ended", () => {
+        if (!reklamaAktywna) {
+          z = (z + 1) % koledy.length;
+          x++;
+          aktualizuj();
+        }
+      });
+      doTylu.addEventListener("click", () => {
+        if (!reklamaAktywna) {
+          z = (z - 1 + koledy.length) % koledy.length;
+          x++;
+          aktualizuj();
+        }
+      });
+      pauza.addEventListener("click", () => {
+        let jestPauza = koledaMuzyka.paused;
+        if (jestPauza) {
+          koledaMuzyka.play();
+          pausa = false;
+          pauza.innerHTML = `⏸️`
+        } else if (!jestPauza){
+          koledaMuzyka.pause();
+          pausa = true;
+          pauza.innerHTML = `▶️`
+        }
+      });
+    </script>
+  </body>
+</html>

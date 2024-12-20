@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Strona świąteczna</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div id="baner">
+      <div id="lewo">
+        <div id="kalendarz">
+          <a href="kalendarz.html">Kalendarz Adwentowy</a>
+        </div>
+        <div id="gry">
+          <a href="koledy.html">Świąteczne kolędy</a>
+        </div>
+        <div id="swiateczna-gra">
+          <a href="gra.html">Świąteczna gra</a>
+        </div>
+      </div>
+      <div id="h1">
+        <a href="index.html">
+          <h1>Strona Świąteczna</h1>
+        </a>
+      </div>
+      <div id="prawo">
+        <div id="kursy">
+          <a href="kurs.html">Świąteczne kursy</a>
+        </div>
+        <div id="galeria">
+          <a href="galeria.html">Galeria prac</a>
+        </div>
+      </div>
+    </div>
+
+    <div id="galeria-galeria">
+      <div class="galeria">
+        <h2></h2>
+      </div>
+      <div class="galeria">
+        <h2></h2>
+      </div>
+      <div class="galeria">
+        <h2></h2>
+      </div>
+    </div>
+    <div class="ocena none">
+      <div class="gwiazdka" data-ocena="1" data-klikniety="0">⭐</div>
+      <div class="gwiazdka" data-ocena="2" data-klikniety="0">⭐</div>
+      <div class="gwiazdka" data-ocena="3" data-klikniety="0">⭐</div>
+      <div class="gwiazdka" data-ocena="4" data-klikniety="0">⭐</div>
+      <div class="gwiazdka" data-ocena="5" data-klikniety="0">⭐</div>
+    </div>
+    <div class="wysylanie"></div>
+    <div class="formularz">
+      <div class="formularz-poprawny">
+        <h1>Oceń moją stronę!</h1>
+        <div class="img"></div>
+        <textarea name="opinia"></textarea>
+        <button type="button" class="formularz-wyslij">Wyślij opinię</button>
+        <button type="button" class="formularz-usun">&times;</button>
+      </div>
+    </div>
+
+    <div id="timer"></div>
+    <div id="platki"></div>
+    <script src="zegar.js"></script>
+    <script src="platki.js"></script>
+    <script>
+      //Głównie robione przeze mnie
+
+      let galeria = document.getElementById("galeria-galeria");
+      let ocena = document.getElementsByClassName("ocena")[0];
+
+      function gwiazdyWejscie(gwiazdki, ocenaKopia) {
+        for (let i = 0; i < gwiazdki; i++) {
+          if (ocenaKopia.children[i].dataset.klikniety === "0") {
+            ocenaKopia.children[i].style.filter = "grayscale(0%)";
+          }
+        }
+      }
+
+      function gwiazdyWyjscie(gwiazdki, ocenaKopia) {
+        for (let i = 0; i < gwiazdki; i++) {
+          if (ocenaKopia.children[i].dataset.klikniety === "0") {
+            ocenaKopia.children[i].style.filter = "grayscale(100%)";
+          }
+        }
+      }
+
+      function gwiazdyClick(gwiazdki, ocenaKopia) {
+        for (let i = 0; i < 5; i++) {
+          ocenaKopia.children[i].dataset.klikniety = "0";
+          ocenaKopia.children[i].style.filter = "grayscale(100%)";
+        }
+
+        for (let i = 0; i < gwiazdki; i++) {
+          ocenaKopia.children[i].dataset.klikniety = "1";
+          ocenaKopia.children[i].style.filter = "grayscale(0%)";
+        }
+      }
+      Array.from(galeria.children).forEach((el, i) => {
+        let ocenaKopia = ocena.cloneNode(true);
+        let zdjecie = document.createElement("div");
+        zdjecie.className = "galeria-zdjecie";
+        zdjecie.style.backgroundImage = `url("galeria-obraz${i + 1}.jpg")`;
+
+        el.append(zdjecie, ocenaKopia);
+        ocenaKopia.style.display = "flex";
+
+        zdjecie.addEventListener("mouseenter", () => {
+          zdjecie.style.backgroundImage = `url("galeria-obraz-hover${
+            i + 1
+          }.jpg")`;
+        });
+
+        zdjecie.addEventListener("mouseleave", () => {
+          zdjecie.style.backgroundImage = `url("galeria-obraz${i + 1}.jpg")`;
+        });
+
+        Array.from(ocenaKopia.children).forEach((gwiazdka) => {
+          gwiazdka.addEventListener("mouseenter", () => {
+            gwiazdyWejscie(parseInt(gwiazdka.dataset.ocena), ocenaKopia);
+          });
+
+          gwiazdka.addEventListener("mouseleave", () => {
+            gwiazdyWyjscie(parseInt(gwiazdka.dataset.ocena), ocenaKopia);
+          });
+
+          gwiazdka.addEventListener("click", () => {
+            gwiazdyClick(parseInt(gwiazdka.dataset.ocena), ocenaKopia);
+
+            let formularz = document
+              .querySelector(".formularz")
+              .cloneNode(true);
+            formularz.style.display = "flex";
+            formularz.querySelector(
+              ".img"
+            ).style.backgroundImage = `url("galeria-obraz-hover${i + 1}.jpg")`;
+            document.body.appendChild(formularz);
+
+            formularz
+              .querySelector(".formularz-usun")
+              .addEventListener("click", () => {
+                formularz.remove();
+              });
+
+            formularz
+              .querySelector(".formularz-wyslij")
+              .addEventListener("click", () => {
+                const opinia = formularz.querySelector("textarea").value.trim();
+                let powiadomienie = document.createElement("div");
+                powiadomienie.className = "wysylanie";
+
+                if (opinia) {
+                  powiadomienie.style.backgroundColor = "green";
+                  powiadomienie.textContent = "Wysłano pomyślnie";
+                } else {
+                  powiadomienie.style.backgroundColor = "red";
+                  powiadomienie.textContent = "Podaj opinię";
+                }
+                powiadomienie.style.display = "flex";
+                document.body.appendChild(powiadomienie);
+
+                powiadomienie.style.animation =
+                  "wysylanie 2s ease-out forwards";
+
+                setTimeout(() => {
+                  powiadomienie.remove();
+                }, 5000);
+
+                formularz.remove();
+              });
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,165 @@
+@import url(https://fonts.googleapis.com/css?family=Lato:400,700);
+
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+body{
+	background: url("tlo-tlo.jpg");
+	background-size: cover;
+	
+}
+#box{
+	width: 70%;
+	height: 100%;
+	background: transparent;
+	margin: auto;
+}
+#nav{
+	position: absolute;
+	top: 0;
+	right: 0;
+	height: 98vh;
+	width: 3%;
+	background: cyan;
+	transition: all .3s ease-in;
+	background-image: url("tlo-navbar.jpg");
+	background-size: cover;
+	border-radius: 20px 0 0 20px;
+	
+}
+#nav:hover{
+	width: 15%;
+}
+div{
+	text-align: center;
+}
+#nav div{
+	visibility: hidden;
+	transition: all .3s ease-in;
+	width: 100%;
+	font-family: "Lato";
+}
+#nav:hover div, #nav:hover #kraje{
+	visibility: visible;
+}
+#swiat{
+	height: 0;
+	overflow: hidden;
+	border-radius: 20px; 
+}
+#swiat div{
+	width: 80%;
+	height: 50px;
+	margin: auto;
+	padding: 20px 0 0 0;
+	visibility: hidden;
+}
+#kraje:focus + #swiat{
+	height: 550px;
+	backdrop-filter: blur(10px);
+	background: rgba(255,255,255,0.2);
+}
+#kraje{
+	all: unset;
+	height: 50px;
+	width: 100%;
+	visibility: hidden;
+	color: #fff;
+	font-weight: bold;
+	font-family: "Lato";
+	display: block;
+}
+#nav div{
+	padding: 20px 0 0 0;
+}
+#kraje::before{
+	content: "";
+	width: 10px;
+	height: 10px;
+	color: red;
+	display: block;
+	border-left: 5px solid white;
+	border-top: 5px solid white;
+	transform: translate(40px, 15px) rotate(-45deg);
+	transition: all 0.3s linear;
+}
+#kraje:focus::before{
+	transform: translate(40px, 15px) rotate(-135deg);
+}
+a{
+	text-decoration: none;
+	font-family: "Lato";
+}
+a:link, a:visited, a:active{
+	color: #fff;
+	font-weight: bold;
+}
+#swiat:hover :not(:hover){
+	opacity: 0.5;
+}
+#baner{
+	height: 200px;
+	width: 100%;
+	background: url("tlo-baner.jpg");
+	padding: 65px 0 0 0;
+	font-size: 2em;
+	text-transform: uppercase;
+	color: transparent;
+	font-weight: bold;
+	-webkit-text-stroke: 1px white;
+	font-family: "Lato";
+	border-radius: 10% 50%;
+	background-size: cover;
+}
+h1 span:hover{
+	color: white;
+}
+h1 span:has( ~ span:hover){
+	color: white;
+}
+#wprowadzenie{
+	width: calc(50% - 10px);
+	height: 300px;
+	float: left;
+	margin: 5px 5px 0 5px;
+	background: #FFFAFA;
+	border-radius: 20px;
+	box-shadow: 20px 22px 16px -18px rgba(105, 105, 102, 1);
+	transition: all .3s ease-in;
+}
+#tradycje, #zwyczaje, #kuchnia,#muzyka{
+	width: calc(50% - 10px);
+	height: 150px;
+	float: left;
+	margin: 5px 5px 5px 5px;
+	background: #FFFAFA;
+	border-radius: 20px;
+	box-shadow: 20px 22px 16px -18px rgba(105, 105, 102, 1);
+	transition: all .3s ease;
+}
+#wprowadzenie:hover, #tradycje:hover, #zwyczaje:hover, #kuchnia:hover, #muzyka:hover{
+	box-shadow: inset 20px 22px 16px -18px rgba(105, 105, 102, 1);
+	background: #DDDDDD;
+}
+h2{
+	font-family: "Lato";
+	height: 50px;
+	width: 100%;
+	padding: 15px 0 0 0;
+}
+#tradycje p, #zwyczaje p, #kuchnia p , #muzyka p{
+	width: 80%;
+	font-family: "lato";
+	height: calc(150px - 50px);
+	margin: 5px auto;
+}
+#wprowadzenie p {
+	width: 80%;
+	font-family: "lato";
+	height: calc(300px - 50px);
+	margin: 20px auto;
+	font-size:1.5em;
+	
+}

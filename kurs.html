@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Strona świąteczna</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <div id="baner">
+    <div id="lewo">
+      <div id="kalendarz">
+        <a href="kalendarz.html">Kalendarz Adwentowy</a>
+      </div>
+      <div id="gry">
+        <a href="koledy.html">Świąteczne kolędy</a>
+      </div>
+      <div id="gra">
+        <a href="gra.html">Świąteczna gra</a>
+      </div>
+    </div>
+    <div id="h1">
+      <a href="index.html">
+        <h1>Strona Świąteczna</h1>
+      </a>
+    </div>
+    <div id="prawo">
+      <div id="kursy">
+        <a href="kurs.html">Świąteczne kursy</a>
+      </div>
+      <div id="galeria">
+        <a href="galeria.html">Galeria prac</a>
+      </div>
+    </div>
+  </div>
+
+  <div id="kursy-przyciski">
+    <h2>Kursy: </h2>
+  </div>
+  <div id="kurs-kurs"></div>
+
+
+
+  <div id="timer"></div>
+  <div id="platki"></div>
+  <script src="zegar.js"></script>
+  <script src="platki.js"></script>
+  <script>
+    const kursy = [
+  {
+    tytul: "Efekty śniegu w CSS",
+    data: "2024-12-15",
+    czas: "30 min",
+    opis: "Naucz się tworzyć animowane efekty śniegu przy użyciu CSS i JavaScript.",
+    kroki: [
+      "1. Użyj selektora `body` i ustaw tło w postaci ciemnego gradientu.",
+      "2. Stwórz elementy `div` reprezentujące płatki śniegu i przypisz im klasy.",
+      "3. Za pomocą CSS zastosuj animację `keyframes` do przesuwania płatków w dół.",
+      "4. Dodaj JavaScript do generowania losowej liczby płatków oraz ich pozycji.",
+      "5. Ustaw różne prędkości opadania płatków za pomocą właściwości `animation-duration`.",
+      "6. Dodaj efekty interakcji, takie jak zmiana koloru płatków po najechaniu kursorem.",
+      "7. Zoptymalizuj kod, aby płatki pojawiały się i znikały poza ekranem."
+    ]
+  },
+  {
+    tytul: "Zimowe animacje SVG",
+    data: "2024-12-16",
+    czas: "1 Godz",
+    opis: "Warsztaty tworzenia świątecznych animacji w SVG.",
+    kroki: [
+      "1. Utwórz prosty rysunek w SVG, np. choinkę lub bałwana.",
+      "2. Zastosuj `stroke-dasharray` i `stroke-dashoffset`, aby uzyskać efekt rysowania konturów.",
+      "3. Dodaj animację za pomocą CSS `@keyframes` lub atrybutu `animate` w SVG.",
+      "4. Połącz różne animacje, aby stworzyć bardziej złożony efekt.",
+      "5. Użyj gradientów liniowych i promieniowych do uatrakcyjnienia wizualizacji.",
+      "6. Dodaj efekty pulsacji lub migotania do elementów, np. gwiazdek.",
+      "7. Zintegruj animację z interakcjami użytkownika, np. kliknięcie wyzwala nowy efekt."
+    ]
+  },
+  {
+    tytul: "Świąteczne szablony e-mail",
+    data: "2024-12-17",
+    czas: "1 Godz",
+    opis: "Tworzenie pięknych i responsywnych szablonów e-mail na święta.",
+    kroki: [
+      "1. Utwórz strukturę HTML z użyciem `table` dla kompatybilności z klientami e-mail.",
+      "2. Dodaj style inline dla elementów, takich jak czcionki, kolory i marginesy.",
+      "3. Użyj obrazów jako tła, ale pamiętaj o atrybucie `alt` na wypadek ich braku.",
+      "4. Przetestuj szablon w różnych klientach e-mail, np. Outlook, Gmail.",
+      "5. Dodaj responsywność z użyciem media queries do poprawnego wyświetlania na urządzeniach mobilnych.",
+      "6. Zintegruj CTA (Call To Action) z linkami do strony internetowej.",
+      "7. Zoptymalizuj rozmiar obrazów, aby skrócić czas ładowania wiadomości."
+    ]
+  },
+  {
+    tytul: "Tworzenie kalendarza adwentowego w JavaScript",
+    data: "2024-12-18",
+    czas: "2 Godz",
+    opis: "Dowiedz się, jak stworzyć interaktywny kalendarz adwentowy w JavaScript.",
+    kroki: [
+      "1. Stwórz strukturę HTML z 24 przyciskami reprezentującymi dni kalendarza.",
+      "2. Napisz funkcję w JavaScript, która wyświetli niespodziankę po kliknięciu w dany dzień.",
+      "3. Użyj tablicy do przechowywania treści (np. cytatów lub obrazków) dla każdego dnia.",
+      "4. Dodaj animacje CSS, aby otwieranie dni było bardziej atrakcyjne.",
+      "5. Zaimplementuj logikę blokowania dostępu do dni przyszłych.",
+      "6. Dodaj efekt dźwiękowy podczas otwierania każdego dnia.",
+      "7. Upewnij się, że kalendarz działa poprawnie na różnych przeglądarkach."
+    ]
+  },
+  {
+    tytul: "Gra w łapanie prezentów",
+    data: "2024-12-19",
+    czas: "2.5 Godz",
+    opis: "Naucz się tworzyć prostą grę przeglądarkową w JavaScript.",
+    kroki: [
+      "1. Stwórz planszę gry jako `canvas` w HTML.",
+      "2. Dodaj ruchome elementy (prezenty) za pomocą funkcji rysowania w JavaScript.",
+      "3. Zaimplementuj sterowanie postacią przy użyciu klawiatury (strzałki).",
+      "4. Stwórz logikę punktacji i dodaj ekran końcowy gry.",
+      "5. Dodaj różne typy prezentów z różnymi wartościami punktowymi.",
+      "6. Ustaw poziomy trudności z szybszym spadaniem prezentów.",
+      "7. Dodaj dźwięki i muzykę w tle, aby gra była bardziej wciągająca."
+    ]
+  },
+  {
+    tytul: "Zegar odliczający do Świąt w JavaScript",
+    data: "2024-12-20",
+    czas: "30 Min",
+    opis: "Zbuduj zegar odliczający czas do Świąt w czasie rzeczywistym.",
+    kroki: [
+      "1. Utwórz elementy HTML do wyświetlania dni, godzin, minut i sekund.",
+      "2. Napisz funkcję w JavaScript, która oblicza różnicę między bieżącą datą a datą Świąt.",
+      "3. Użyj `setInterval`, aby odświeżać wartości na stronie co sekundę.",
+      "4. Dodaj style CSS, aby zegar wyglądał estetycznie i świątecznie.",
+      "5. Dodaj efekty animacji podczas zmiany cyfr.",
+      "6. Zaimplementuj ciemny motyw dla zegara.",
+      "7. Dodaj opcję personalizacji daty końcowej dla użytkownika."
+    ]
+  },
+  {
+    tytul: "Tworzenie śnieżnej kuli w CSS i JavaScript",
+    data: "2024-12-21",
+    czas: "1.5 Godz",
+    opis: "Zbuduj animowaną śnieżną kulę w CSS i JavaScript.",
+    kroki: [
+      "1. Stwórz kulę jako `div` z zaokrąglonym tłem i elementami wewnętrznymi w CSS.",
+      "2. Dodaj animację spadających płatków śniegu w JavaScript.",
+      "3. Zaimplementuj możliwość potrząsania kulą przy użyciu zdarzeń `mousemove` lub `click`.",
+      "4. Połącz wszystko w estetyczną, interaktywną całość.",
+      "5. Dodaj animacje po zatrzymaniu potrząsania, np. osiadanie płatków na dnie kuli.",
+      "6. Zastosuj efekty świetlne, aby kula wyglądała bardziej realistycznie.",
+      "7. Dodaj możliwość zmiany tła lub tematu śnieżnej kuli."
+    ]
+  }
+];
+
+    kursy.forEach((kurs, index) => {
+      let kursKurs = document.getElementById("kurs-kurs");
+      let przyciskiKurs = document.getElementById("kursy-przyciski");
+      let kursDiv = document.createElement("div");
+      kursDiv.className = 'kurs-przycisk';
+      kursDiv.innerHTML = `${kurs.tytul}`;
+      kursDiv.addEventListener("click", () => {
+        kursKurs.innerHTML = `
+            <h1>${kurs.tytul}</h1>
+            <p><strong>Data dodania: </strong>${kurs.data} | <strong>Czas trwania: </strong>${kurs.czas}</p>
+            <p><strong>Opis: </strong> ${kurs.opis}</p>
+            <h3>Kroki:</h3>
+        `;
+        kurs.kroki.forEach((krok) => {
+          let krokElement = document.createElement("p");
+          krokElement.textContent = krok;
+          kursKurs.appendChild(krokElement);
+        });
+      });
+      przyciskiKurs.append(kursDiv);
+    });
+  </script>
+</body>
+
+</html>
